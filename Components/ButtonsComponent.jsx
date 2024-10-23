@@ -1,5 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import SingleButton from './SingleButton';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {
@@ -12,6 +12,42 @@ import {
 const ButtonsComponent = ({setimers, timers}) => {
   const [timerStatus, settimerStatus] = useState('Start');
   const timerRef = useRef(null);
+
+  const TIMER_SPEED = 50;
+
+  useEffect(() => {
+    if (timers.miliscnds >= 100) {
+      setimers(prev => {
+        return {
+          ...prev,
+          miliscnds:prev.miliscnds - 100,
+          scnds: prev.scnds + 1, // Increment seconds
+        };
+      });
+    }
+
+    if (timers.scnds >= 60) {
+      setimers(prev => {
+        return {
+          ...prev,
+          scnds:prev.scnds - 60,
+          minutes: prev.minutes + 1, // Increment minutes
+        };
+      });
+    }
+
+
+    if (timers.minutes >= 60) {
+      setimers(prev => {
+        return {
+          ...prev,
+          minutes:prev.minutes - 60,
+        };
+      });
+    }
+
+
+  }, [timers, setimers]); // Dependency array includes timers and setimers
 
   function toggleTimerStatus() {
     switch (timerStatus) {
@@ -32,7 +68,7 @@ const ButtonsComponent = ({setimers, timers}) => {
   }
 
   function handleStartTimer() {
-    console.log('Hello world');
+    if (timerRef.current !== null) return;
     timerRef.current = setInterval(() => {
       setimers(prev => {
         return {
@@ -40,13 +76,19 @@ const ButtonsComponent = ({setimers, timers}) => {
           miliscnds: prev.miliscnds + 1,
         };
       });
-    },10);
-    console.log(timers.miliscnds);
+    }, TIMER_SPEED);
     toggleTimerStatus();
   }
 
+  function resetTimer() {
+    if (timerRef.current !== null) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  }
+
   function handleStopTimer() {
-    clearInterval(timerRef.current);
+    resetTimer();
     toggleTimerStatus();
   }
 
@@ -56,7 +98,7 @@ const ButtonsComponent = ({setimers, timers}) => {
       scnds: 0,
       minutes: 0,
     });
-    clearInterval(timerRef.current);
+    resetTimer();
     settimerStatus('Start');
   }
 
