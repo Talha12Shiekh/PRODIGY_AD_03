@@ -9,8 +9,8 @@ const TimerComponent = ({timers}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.timer}>
-        {formatText(minutes)} : {formatText(scnds)} .{' '}
-        {formatText(miliscnds)}
+        {formatText(minutes, 'minutes')} : {formatText(scnds, 'seconds')} .{' '}
+        {formatText(miliscnds, 'miliseconds')}
       </Text>
     </View>
   );

@@ -6,10 +6,14 @@ export const BLUE_BTN_BG = '#4a4b84';
 export const LIGHT_BLUE_BTN_BG = '#4a4b8482';
 
 export const formatText = (txt,type) => {
-  if (txt < 10) {
-    return '0' + txt;
+  if (type === 'miliseconds') {
+    if (txt >= 100) return '00';
   }
-  return txt;
+  
+  if(type === "seconds" || type === "minutes"){
+    if (txt >= 60) return '00';
+  }
+  return String(txt).padStart(2, '0'); 
 };
 
 export const center = {

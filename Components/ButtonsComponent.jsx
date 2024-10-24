@@ -37,15 +37,6 @@ const ButtonsComponent = ({setimers, timers}) => {
     }
 
 
-    if (timers.minutes >= 60) {
-      setimers(prev => {
-        return {
-          ...prev,
-          minutes:prev.minutes - 60,
-        };
-      });
-    }
-
 
   }, [timers, setimers]); // Dependency array includes timers and setimers
 
