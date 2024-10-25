@@ -46,9 +46,14 @@ const ButtonsComponent = ({setimers, timers}) => {
       });
     }
 
-    if (timers.hours === 99 && timers.minutes === 59 && timers.scnds === 59 && timers.miliscnds >= 100) {
+    if (
+      timers.hours === 99 &&
+      timers.minutes === 59 &&
+      timers.scnds === 59 &&
+      timers.miliscnds === 99
+    ) {
       resetTimer();
-      settimerStatus('Start');
+      settimerStatus('');
     }
   }, [timers, setimers]); // Dependency array includes timers and setimers
 
@@ -62,6 +67,9 @@ const ButtonsComponent = ({setimers, timers}) => {
         break;
       case 'Resume':
         settimerStatus('Stop');
+        break;
+      case '':
+        settimerStatus('');
         break;
 
       default:
@@ -135,15 +143,23 @@ const ButtonsComponent = ({setimers, timers}) => {
           />
         );
       }
+      case '': {
+        return null;
+      }
     }
   }
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {justifyContent: timerStatus === '' ? 'flex-end' : 'space-between'},
+      ]}>
       <SingleButton
         onPress={handleResetTimer}
-        disabled={timerStatus !== 'Resume'}
+        disabled={timerStatus !== 'Resume' && timerStatus !== ''}
         text="Reset"
+        fullWidth={timerStatus === ''}
         bgcolor={GREY_COLOR}
       />
       {RenderButton()}
@@ -158,7 +174,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    justifyContent: 'space-between',
     paddingHorizontal: wp(12),
     paddingBottom: wp(10),
   },

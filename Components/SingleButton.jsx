@@ -3,14 +3,18 @@ import React from 'react';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {center, WHITE_COLOR} from '../Constants';
 
-const SingleButton = ({text, onPress, bgcolor, disabled}) => {
+const SingleButton = ({text, onPress, bgcolor, disabled,fullWidth}) => {
   return (
-    <View>
+    <View style={{width:fullWidth ? "100%" : null}}>
       <TouchableOpacity disabled={disabled} onPress={onPress}>
         <View
           style={[
             styles.btn,
-            {backgroundColor: bgcolor, opacity: disabled ? 0.5 : 1},
+            {
+              backgroundColor: bgcolor,
+              opacity: disabled ? 0.5 : 1,
+              width: fullWidth ? '100%' : wp(30),
+            },
           ]}>
           <Text style={styles.btntxt}>{text}</Text>
         </View>

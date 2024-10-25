@@ -10,15 +10,17 @@ const TimerComponent = ({timers}) => {
   let showingHours = showingHoursCondition && formatText(hours, 'hours');
   let showingHoursColon = showingHoursCondition && ':';
   let showingMinutes = formatText(minutes, 'minutes');
-  let showingSeconds= formatText(scnds, 'seconds')
-  let showingMiliseconds= formatText(miliscnds, 'miliseconds');
+  let showingSeconds = formatText(scnds, 'seconds');
+  let showingMiliseconds = formatText(miliscnds, 'miliseconds');
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.timer,{fontSize:wp(showingHoursCondition ? 12 : 15)}]}>
-        {showingHours}{showingHoursCondition && " "}
-        {showingHoursColon} {showingMinutes} :{' '}
-        {showingSeconds} . {showingMiliseconds}
+      <Text
+        style={[styles.timer, {fontSize: wp(showingHoursCondition ? 12 : 15)}]}>
+        {showingHours}
+        {showingHoursCondition && ' '}
+        {showingHoursColon} {showingMinutes} : {showingSeconds} .{' '}
+        {showingMiliseconds}
       </Text>
     </View>
   );

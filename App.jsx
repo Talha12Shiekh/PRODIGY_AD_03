@@ -8,10 +8,10 @@ import ButtonsComponent from './Components/ButtonsComponent';
 
 const App = () => {
   const [timers, setimers] = useState({
-    miliscnds: 87,
-    scnds:58,
-    minutes: 59,
-    hours:99
+    miliscnds: 0,
+    scnds:0,
+    minutes: 0,
+    hours:0
   });
 
   return (
