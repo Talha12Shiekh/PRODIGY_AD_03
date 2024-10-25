@@ -6,7 +6,7 @@ export const BLUE_BTN_BG = '#4a4b84';
 export const LIGHT_BLUE_BTN_BG = '#4a4b8482';
 
 export const formatText = (txt,type) => {
-  if (type === 'miliseconds') {
+  if (type === 'miliseconds' || type === 'hours') {
     if (txt >= 100) return '00';
   }
   

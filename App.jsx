@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 import {BG_COLOR} from './Constants';
 import TimerComponent from './Components/TimerComponent';
@@ -8,9 +8,10 @@ import ButtonsComponent from './Components/ButtonsComponent';
 
 const App = () => {
   const [timers, setimers] = useState({
-    miliscnds: 0,
-    scnds:0,
-    minutes: 0,
+    miliscnds: 87,
+    scnds:58,
+    minutes: 59,
+    hours:99
   });
 
   return (

@@ -20,7 +20,7 @@ const ButtonsComponent = ({setimers, timers}) => {
       setimers(prev => {
         return {
           ...prev,
-          miliscnds:prev.miliscnds - 100,
+          miliscnds: prev.miliscnds - 100,
           scnds: prev.scnds + 1, // Increment seconds
         };
       });
@@ -30,14 +30,26 @@ const ButtonsComponent = ({setimers, timers}) => {
       setimers(prev => {
         return {
           ...prev,
-          scnds:prev.scnds - 60,
+          scnds: prev.scnds - 60,
           minutes: prev.minutes + 1, // Increment minutes
         };
       });
     }
 
+    if (timers.minutes >= 60) {
+      setimers(prev => {
+        return {
+          ...prev,
+          minutes: prev.minutes - 60,
+          hours: prev.hours + 1, // Increment hours
+        };
+      });
+    }
 
-
+    if (timers.hours === 99 && timers.minutes === 59 && timers.scnds === 59 && timers.miliscnds >= 100) {
+      resetTimer();
+      settimerStatus('Start');
+    }
   }, [timers, setimers]); // Dependency array includes timers and setimers
 
   function toggleTimerStatus() {
@@ -88,6 +100,7 @@ const ButtonsComponent = ({setimers, timers}) => {
       miliscnds: 0,
       scnds: 0,
       minutes: 0,
+      hours: 0,
     });
     resetTimer();
     settimerStatus('Start');
