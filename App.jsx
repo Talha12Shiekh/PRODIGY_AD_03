@@ -1,18 +1,35 @@
-import {StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
+import {StyleSheet, View, LogBox, AppState, ToastAndroid} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {BG_COLOR} from './Constants';
 import TimerComponent from './Components/TimerComponent';
 import ButtonsComponent from './Components/ButtonsComponent';
 
-// https://www.linkedin.com/posts/talha-shiekh-a99b4b313_reactjs-materialui-jobportal-activity-7243315750013177856-pnHV?utm_source=share&utm_medium=member_desktop
+LogBox.ignoreLogs(['new NativeEventEmitter']);
+LogBox.ignoreAllLogs();
 
 const App = () => {
   const [timers, setimers] = useState({
     miliscnds: 0,
-    scnds:0,
+    scnds: 0,
     minutes: 0,
-    hours:0
+    hours: 0,
   });
+
+  const [appState, setAppState] = useState(AppState.currentState);
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      if (nextAppState === 'background') {
+        ToastAndroid.show('Your timer is running in the background',ToastAndroid.LONG);
+      }
+      setAppState(nextAppState);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      subscription.remove();
+    };
+  }, [appState]);
 
   return (
     <View style={styles.container}>

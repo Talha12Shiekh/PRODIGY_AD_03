@@ -12,7 +12,7 @@ const TimerComponent = ({timers}) => {
 
   const ShowingHoursComponent = () => (
     <TimerTextContainer>
-      {showingHoursCondition && `${formatText(hours, 'hours')} :`}
+      {showingHoursCondition && `${formatText(hours, 'hours')} : `}
     </TimerTextContainer>
   );
 
@@ -23,7 +23,7 @@ const TimerComponent = ({timers}) => {
         {width: showingHoursCondition ? wp(23) : wp(28)},
       ]}>
       <Text
-        style={[styles.timer, {fontSize: wp(showingHoursCondition ? 12 : 14)}]}>
+        style={[styles.timer, {fontSize: wp(showingHoursCondition ? 11 : 14)}]}>
         {children}
       </Text>
     </View>
@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
     width: wp(28), // Adjust width to keep each segment aligned; tweak as needed
     justifyContent: 'center',
     alignItems: 'center',
-    textAlign:"center",
+    textAlign: 'center',
   },
 });

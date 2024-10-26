@@ -8,6 +8,7 @@ import {
   LIGHT_BLUE_BTN_BG,
   RED_COLOR,
 } from '../Constants';
+import BackgroundTimer from 'react-native-background-timer';
 
 const ButtonsComponent = ({setimers, timers}) => {
   const [timerStatus, settimerStatus] = useState('Start');
@@ -80,7 +81,7 @@ const ButtonsComponent = ({setimers, timers}) => {
 
   function handleStartTimer() {
     if (timerRef.current !== null) return;
-    timerRef.current = setInterval(() => {
+    timerRef.current = BackgroundTimer.setInterval(() => {
       setimers(prev => {
         return {
           ...prev,
@@ -91,9 +92,11 @@ const ButtonsComponent = ({setimers, timers}) => {
     toggleTimerStatus();
   }
 
+ 
+
   function resetTimer() {
     if (timerRef.current !== null) {
-      clearInterval(timerRef.current);
+      BackgroundTimer.clearInterval(timerRef.current);
       timerRef.current = null;
     }
   }
