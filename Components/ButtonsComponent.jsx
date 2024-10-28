@@ -10,8 +10,7 @@ import {
 } from '../Constants';
 import BackgroundTimer from 'react-native-background-timer';
 
-const ButtonsComponent = ({setimers, timers}) => {
-  const [timerStatus, settimerStatus] = useState('Start');
+const ButtonsComponent = ({setimers, timers,timerStatus,settimerStatus}) => {
   const timerRef = useRef(null);
 
   const TIMER_SPEED = 50;

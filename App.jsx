@@ -14,13 +14,17 @@ const App = () => {
     minutes: 0,
     hours: 0,
   });
+  const [timerStatus, settimerStatus] = useState('Start');
+
 
   const [appState, setAppState] = useState(AppState.currentState);
 
   useEffect(() => {
     const subscription = AppState.addEventListener('change', nextAppState => {
       if (nextAppState === 'background') {
-        ToastAndroid.show('Your timer is running in the background',ToastAndroid.LONG);
+          if(timerStatus === "Resume"){
+            ToastAndroid.show('Timer is running in the background',ToastAndroid.LONG);
+          }
       }
       setAppState(nextAppState);
     });
@@ -34,7 +38,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <TimerComponent timers={timers} />
-      <ButtonsComponent timers={timers} setimers={setimers} />
+      <ButtonsComponent timerStatus={timerStatus} settimerStatus={settimerStatus} timers={timers} setimers={setimers} />
     </View>
   );
 };
