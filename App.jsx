@@ -14,6 +14,7 @@ const App = () => {
     minutes: 0,
     hours: 0,
   });
+
   const [timerStatus, settimerStatus] = useState('Start');
 
 
@@ -22,9 +23,7 @@ const App = () => {
   useEffect(() => {
     const subscription = AppState.addEventListener('change', nextAppState => {
       if (nextAppState === 'background') {
-          if(timerStatus === "Resume"){
             ToastAndroid.show('Timer is running in the background',ToastAndroid.LONG);
-          }
       }
       setAppState(nextAppState);
     });
